@@ -10,23 +10,7 @@ jobs:
     steps:
     - name: Download CLI
       run: |
-      
-       wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
         mkdir sfdx
-        tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
-         ./sfdx/install
+       
 
-    - name: Setup Org  
-      run: |
-       echo 'Running tests'
-       sfdx force:auth:jwt:grant -u atul.baviskar@enzigma.in -f C:\jwt\server.key -i 3MVG97quAmFZJfVwZ9x8YFKdYzh31U1sDltFjR1fhSUqkepQpQkiZe0QYRubMop4bNF.M44sNeqjI.ugquHI0 -r https://login.salesforce.com
-      
-    - name: Run Apex Tests
-      run: |
-       mkdir -p ~/junit
-       sfdx force:apex:test:run -u atul.baviskar@enzigma.in  -c -d ~/junit -r junit --wait 5
-      
-    - name: Convert metadata into file of metadata formate   
-      run: |
-       sfdx force:source:convert -r force-app/main/default -d ant/unpackaged   
-       sfdx force:mdapi:deploy -d ant\unpackaged -u atul.baviskar@enzigma.in -w -1
+  
