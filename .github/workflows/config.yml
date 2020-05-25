@@ -6,7 +6,7 @@ on: [push]
 
 jobs: 
  build:
-   runs-on: [self-hosted, linux, ARM64]
+   runs-on: ubuntu-latest
    steps:
       - name: Download CLI
         run: 
