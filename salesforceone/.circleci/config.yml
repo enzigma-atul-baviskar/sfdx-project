@@ -5,7 +5,7 @@ general:
 #   branches:
 #     only:
 #       - dev # specific branch
-#       - /dev-.*/ # or regexes                                         
+#       - /dev-.*/ # or regexes
 
 jobs:
   build:
@@ -28,30 +28,17 @@ jobs:
             ./sfdx/install
             sfdx
             mkdir tmp
-      - run:
-          name: Create hub key
-          command: |
-            echo 'make hub key'
-            #- mkdir keys
-            #- echo $HUB_SERVER_KEY_HEX | xxd -r -ps >> keys/hub.key
-            openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-            #- openssl rsa -in keys/hub.key -check -noout
-          ### Uncomment the following if performing deployments
-          #- echo 'make deploy key'
-          #- echo $DEPLOY_SERVER_KEY_HEX | xxd -r -ps >> keys/deploy.key
-          #- openssl rsa -in keys/deploy.key -check -noout
-          #- sfdx force:auth:jwt:grant --clientid $DEPLOY_CONSUMER_KEY --jwtkeyfile keys/deploy.key --username $DEPLOY_SFDC_USER -a deploy
-      - run:
+               - run:
           name: Setup Org
           command: |
             echo 'Running tests'
              sfdx force:auth:jwt:grant -u $HUB_SFDC_USER  -f assets/server.key  -i $HUB_CONSUMER_KEY -r https://login.salesforce.co
-          
+  
       - run:
           name: Run Apex Tests
           command: |
             mkdir -p ~/junit
-            sfdx force:apex:test:run -u $HUB_SFDC_USER  -c -d ~/junit -r junit --wait 5
+               sfdx force:apex:test:run -u $HUB_SFDC_USER  -c -d ~/junit -r junit --wait 5
       - store_test_results:
           path: ~/junit
       - run:
@@ -62,5 +49,5 @@ jobs:
           name: Deply on master     
           Command: |
           sfdx force:mdapi:deploy -d ant\unpackaged -u $HUB_SFDC_USER -w -1
-             
+
 
