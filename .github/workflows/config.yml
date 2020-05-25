@@ -1,0 +1,14 @@
+
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: $HUB_SFDC_USER
+        issue-message: 'Hi ! there!! thanks for your contribution!, you are awesome! '
+        pr-message: 'Hey what an input! please give us a bit of time to review it! We will be in touch soon.'
