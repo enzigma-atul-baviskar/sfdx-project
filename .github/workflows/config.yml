@@ -9,6 +9,6 @@ jobs:
     steps:
     - uses: actions/first-interaction@v1
       with:
-        repo-token:${{ secrets.HUB_SFDC_USER }} 
+        repo-token: ${{ secrets.HUB_SFDC_USER }} 
         issue-message: 'Hi ! there!! thanks for your contribution!, you are awesome! '
         pr-message: 'Hey what an input! please give us a bit of time to review it! We will be in touch soon.'
