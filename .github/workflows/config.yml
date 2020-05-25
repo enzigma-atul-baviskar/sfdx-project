@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Download CLI
       run: |
-        mkdir sfdx
+        mkdir assests/sfdx
        
 
   
