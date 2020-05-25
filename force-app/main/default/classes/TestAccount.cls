@@ -1,8 +1,8 @@
 public class TestAccount {
 
     public static integer getAccount(){
-        List<account> lstaccTT =  new List<Account>();
-        lstaccTT = [SELECT ID,Name FROM Account LIMIT 1];
-        return lstaccTT.size();
+        List<account> lstaccTTT =  new List<Account>();
+        lstaccTTT = [SELECT ID,Name FROM Account LIMIT 1];
+        return lstaccTTT.size();
     }
 }

@@ -4,44 +4,36 @@ name: Master
 on: [push]
 
 
-jobs:
-  build:
-    machine: true
-    working_directory: ~/salesforceone
-    environment:
-      # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
-      # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
-      - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-    steps:
-      - checkout
-      - run:
-          name: Download CLI
-          command: |
-            mkdir sfdx
-            wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
-      - run:
-          name: Install CLI
-          command: |
-            ./sfdx/install
-            sfdx
-            mkdir tmp
-      - run:
-          name: Setup Org
-          command: |
-            echo 'Running tests'
-             sfdx force:auth:jwt:grant -u atul.baviskar@enzigma.in -f C:\jwt\server.key -i 3MVG97quAmFZJfVwZ9x8YFKdYzh31U1sDltFjR1fhSUqkepQpQkiZe0QYRubMop4bNF.M44sNeqjI.ugquHI0 -r https://login.salesforce.com
-      - run:
-          name: Run Apex Tests
-          command: |
-            mkdir -p ~/junit
-            sfdx force:apex:test:run -u atul.baviskar@enzigma.in  -c -d ~/junit -r junit --wait 5
-      - store_test_results:
-          path: ~/junit
-      - run:
-          name: Convert metadata into file of metadata formate
-          command: |
-            sfdx force:source:convert -r force-app/main/default -d ant/unpackaged
-       - run:
-          name: Deply on master     
-          Command: |
-          sfdx force:mdapi:deploy -d ant\unpackaged -u atul.baviskar@enzigma.in -w -1
+jobs: 
+ build:
+   runs-on: ubuntu-latest
+   steps:
+   - name: Install Salesforce CLI
+     run: |
+      wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+      mkdir sfdx
+      tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+      ./sfdx/install
+   - name: Setup Org  
+     run: |
+      echo 'Running tests'
+      sfdx force:auth:jwt:grant -u atul.baviskar@enzigma.in -f C:\jwt\server.key -i 3MVG97quAmFZJfVwZ9x8YFKdYzh31U1sDltFjR1fhSUqkepQpQkiZe0QYRubMop4bNF.M44sNeqjI.ugquHI0 -r https://login.salesforce.com
+      
+   - name: Run Apex Tests
+     run: |
+      mkdir -p ~/junit
+      sfdx force:apex:test:run -u atul.baviskar@enzigma.in  -c -d ~/junit -r junit --wait 5
+      
+   - name: Convert metadata into file of metadata formate   
+     run: |
+      sfdx force:source:convert -r force-app/main/default -d ant/unpackaged   
+      sfdx force:mdapi:deploy -d ant\unpackaged -u atul.baviskar@enzigma.in -w -1
+
+ 
+      
+          
+
+         
+    
+  
+   
