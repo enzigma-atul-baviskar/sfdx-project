@@ -6,7 +6,7 @@ general:
 #     only:
 #       - dev # specific branch
 #       - /dev-.*/ # or regexes
-
+on: [push]
 jobs:
   build:
     machine: true
