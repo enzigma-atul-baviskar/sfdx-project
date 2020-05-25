@@ -7,10 +7,10 @@ on: [push]
 jobs: 
  build:
     runs-on: ubuntu-latest
+    env:
+     working_directory:  ~/sfdx-project
     steps:
     - name: Download CLI
-      run: |
-        mkdir ~/assests/sfdx
-       
-
-  
+      run: 
+            mkdir sfdx
+            wget -qO- https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz | tar xJ -C sfdx --strip-components 1
