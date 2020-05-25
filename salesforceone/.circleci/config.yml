@@ -1,54 +1,14 @@
-version: 2
 
-general:
-# Uncomment the following to specify only a specific branch
-#   branches:
-#     only:
-#       - dev # specific branch
-#       - /dev-.*/ # or regexes
-on: push
+name: Greetings
+
+on: [pull_request, issues]
+
 jobs:
-  build:
-    machine: true
-    working_directory: ~/salesforceone
-    environment:
-      # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
-      # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
-      - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+  greeting:
+    runs-on: ubuntu-latest
     steps:
-      - checkout
-      - run:
-          name: Download CLI
-          command: |
-            mkdir sfdx
-             mkdir -p ~/TestFile
-            wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
-      - run:
-          name: Install CLI
-          command: |
-            ./sfdx/install
-            sfdx
-            mkdir tmp
-               - run:
-          name: Setup Org
-          command: |
-            echo 'Running tests'
-             sfdx force:auth:jwt:grant -u $HUB_SFDC_USER  -f assets/server.key  -i $HUB_CONSUMER_KEY -r https://login.salesforce.co
-  
-      - run:
-          name: Run Apex Tests
-          command: |
-            mkdir -p ~/junit
-               sfdx force:apex:test:run -u $HUB_SFDC_USER  -c -d ~/junit -r junit --wait 5
-      - store_test_results:
-          path: ~/junit
-      - run:
-          name: Convert metadata into file of metadata formate
-          command: |
-            sfdx force:source:convert -r force-app/main/default -d ant/unpackaged
-       - run:
-          name: Deply on master     
-          Command: |
-          sfdx force:mdapi:deploy -d ant\unpackaged -u $HUB_SFDC_USER -w -1
-
-
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: $HUB_SFDC_USER
+        issue-message: 'Hi ! there!! thanks for your contribution!, you are awesome! '
+        pr-message: 'Hey what an input! please give us a bit of time to review it! We will be in touch soon.'
