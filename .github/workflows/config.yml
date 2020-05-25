@@ -11,5 +11,5 @@ jobs:
       with:
         repo-token: $HUB_SFDC_USER
         echo: 'THe Test  $HUB_SFDC_USER'
-        issue-message: 'Hi !  $HUB_SFDC_USER there!! thanks for ${{ secrets.HUB_SFDC_USER }} your contribution!, you are awesome! '
+        issue-message: 'Hii !  $HUB_SFDC_USER there!! thanks for ${{ secrets.HUB_SFDC_USER }} your contribution!, you are awesome! '
         pr-message: 'Hey what an input! please give us a bit of time to review it! We will be in touch soon.'
