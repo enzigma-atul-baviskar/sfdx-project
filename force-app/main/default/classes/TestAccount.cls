@@ -1,12 +1,12 @@
 public class TestAccount {
 
     public static integer getAccount(){
-        List<account> lstaccTTT =  new List<Account>();
+        List<account> lstaccTTTX =  new List<Account>();
 
 
 
-        
-        lstaccTTT = [SELECT ID,Name FROM Account LIMIT 1];
-        return lstaccTTT.size();
+
+        lstaccTTTX = [SELECT ID,Name FROM Account LIMIT 1];
+        return lstaccTTTX.size();
     }
 }
