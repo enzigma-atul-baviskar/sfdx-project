@@ -10,6 +10,8 @@ jobs:
    steps:
       - name: Download CLI
         run: 
-           mkdir -p  /sfdx-project/assests/sfdx-Test
+          echo "This is DIR::" $(pwd)
+          echo "T" $(pwd)/assests/sfdx-Test
+           mkdir  $(pwd)/assests/sfdx-Test
           
 
