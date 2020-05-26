@@ -23,7 +23,7 @@ jobs:
 
     - name: Run Apex test
        mkdir  assests\Testunit
-      run: node_modules/sfdx-cli/bin/run force:apex:test:run  -u atul.baviskar@enzigma.in  -c -d assests\Testunit  --wait 5
+      run: node_modules/sfdx-cli/bin/run force:apex:test:run  -u atul.baviskar@enzigma.in  -c -d assests/Testunit -r assests/Testunit --wait 5
 
     - name: Convert metadata into file of metadata formate
       run: node_modules/sfdx-cli/bin/run force:source:convert -r force-app/main/default -d ant/unpackaged
