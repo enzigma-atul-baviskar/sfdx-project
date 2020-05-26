@@ -10,6 +10,6 @@ jobs:
    steps:
       - name: Download CLI
         run: 
-           mkdir sfdx-Test
+           mkdir ../../sfdx-project/assests/sfdx-Test
           
 
