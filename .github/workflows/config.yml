@@ -11,7 +11,7 @@ jobs:
       - name: Download CLI
         run: 
           echo "This is DIR::" $(pwd)
-          echo "T" $(pwd)/assests/sfdx-Test
+          echo "T" $DEPLOYDIR
            mkdir  assests/sfdx-Test
           
 
