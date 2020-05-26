@@ -22,5 +22,5 @@ jobs:
         SALESFORCE_JWT_SECRET_KEY: ${{ secrets.SALESFORCE_JWT_SECRET_KEY }}
 
     - name: Run Apex test
-      mkdir -p ~/junit
+       mkdir -p ~/junit
       run: node_modules/sfdx-cli/bin/run force:apex:test:run  -u atul.baviskar@enzigma.in  -c -d ~/junit -r junit --wait 5
